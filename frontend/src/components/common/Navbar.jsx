@@ -11,18 +11,24 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Scroll logic
+  // Scroll logic (fixed for mobile)
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
+      // Always show navbar on mobile screens
+      if (window.innerWidth < 768) {
+        setShowNavbar(true);
+        return;
+      }
+
       if (isMenuOpen) {
-        // If the mobile menu is open, do not hide navbar
+        // Keep visible when mobile menu is open
         setShowNavbar(true);
       } else {
         if (currentScrollY > lastScrollY && currentScrollY > 50) {
           setShowNavbar(false);
-        } else if (currentScrollY < 10) {
+        } else if (currentScrollY < 10 || currentScrollY < lastScrollY) {
           setShowNavbar(true);
         }
       }
@@ -42,11 +48,12 @@ const Navbar = () => {
     };
   }, [isMenuOpen]);
 
-  const linkClass = 'block w-full text-left text-lg font-medium px-4 py-3 rounded hover:bg-slate-700 transition-all duration-200 text-white';
+  const linkClass =
+    'block w-full text-left text-lg font-medium px-4 py-3 rounded hover:bg-slate-700 transition-all duration-200 text-white';
 
   return (
     <nav
-      className={`fixed w-full top-0 z-50 transition-transform duration-300 ${
+      className={`fixed w-full top-0 z-50 bg-slate-900 transition-transform duration-300 ${
         showNavbar ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
@@ -59,10 +66,30 @@ const Navbar = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="/" className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300">Home</a>
-            <a href="/about" className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300">About Us</a>
-            <a href="/testimonial" className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300">Testimonial</a>
-            <a href="/contact" className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300">Contact Us</a>
+            <a
+              href="/"
+              className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300"
+            >
+              Home
+            </a>
+            <a
+              href="/about"
+              className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300"
+            >
+              About Us
+            </a>
+            <a
+              href="/testimonial"
+              className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300"
+            >
+              Testimonial
+            </a>
+            <a
+              href="/contact"
+              className="text-white text-lg font-medium px-4 py-2 rounded-full hover:bg-orange-400 transition-all duration-300"
+            >
+              Contact Us
+            </a>
 
             {/* Social icons */}
             <div className="flex items-center gap-3 ml-4">
@@ -72,7 +99,11 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200"
               >
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M12 2.163c3.204 0 ...z" />
                 </svg>
               </a>
@@ -82,7 +113,11 @@ const Navbar = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200"
               >
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M24 12.073c0 ...z" />
                 </svg>
               </a>
@@ -107,16 +142,24 @@ const Navbar = () => {
       >
         <ul className="flex flex-col space-y-2">
           <li>
-            <a href="/" className={linkClass} onClick={toggleMenu}>Home</a>
+            <a href="/" className={linkClass} onClick={toggleMenu}>
+              Home
+            </a>
           </li>
           <li>
-            <a href="/about" className={linkClass} onClick={toggleMenu}>About Us</a>
+            <a href="/about" className={linkClass} onClick={toggleMenu}>
+              About Us
+            </a>
           </li>
           <li>
-            <a href="/testimonial" className={linkClass} onClick={toggleMenu}>Testimonial</a>
+            <a href="/testimonial" className={linkClass} onClick={toggleMenu}>
+              Testimonial
+            </a>
           </li>
           <li>
-            <a href="/contact" className={linkClass} onClick={toggleMenu}>Contact Us</a>
+            <a href="/contact" className={linkClass} onClick={toggleMenu}>
+              Contact Us
+            </a>
           </li>
         </ul>
 
@@ -128,7 +171,11 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-full flex items-center justify-center"
           >
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-5 h-5 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path d="M12 2.163c3.204 0 ...z" />
             </svg>
           </a>
@@ -138,7 +185,11 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center"
           >
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-5 h-5 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path d="M24 12.073c0 ...z" />
             </svg>
           </a>
