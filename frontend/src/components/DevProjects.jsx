@@ -20,12 +20,12 @@ const GovtProjects = () => {
           {images.map((image, index) => (
             <div
               key={index}
-              className="w-[638px] h-[384px] rounded-3xl overflow-hidden border-4 shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className="w-[638px] h-[384px] rounded-3xl overflow-hidden"
             >
               <img
                 src={image}
                 alt={`Project ${index + 1}`}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover"
               />
             </div>
           ))}
